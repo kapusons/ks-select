@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KsSelect", "src\KsSelect\KsSelect.csproj", "{2BD2B850-630C-429E-A170-EE8E7D5E2F33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{253E8DEE-7C1C-4B9C-809A-FBBAE571CFEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CF23A2C5-43AB-468D-89AC-700140BD7AE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{587E9823-B23A-460B-BA17-F756A2863565}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE080D65-7F16-4C81-9D1D-48B10E03FB0C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KsSelect.Tests", "tests\KsSelect.Tests\KsSelect.Tests.csproj", "{B7A5702A-15AE-4344-8CA8-620208DD82AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KsSelect.Samples", "samples\KsSelect.Samples\KsSelect.Samples.csproj", "{369D5EAA-1345-4454-BDFC-2512336D9698}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BD2B850-630C-429E-A170-EE8E7D5E2F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BD2B850-630C-429E-A170-EE8E7D5E2F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BD2B850-630C-429E-A170-EE8E7D5E2F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BD2B850-630C-429E-A170-EE8E7D5E2F33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A5702A-15AE-4344-8CA8-620208DD82AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A5702A-15AE-4344-8CA8-620208DD82AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A5702A-15AE-4344-8CA8-620208DD82AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A5702A-15AE-4344-8CA8-620208DD82AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{369D5EAA-1345-4454-BDFC-2512336D9698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{369D5EAA-1345-4454-BDFC-2512336D9698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{369D5EAA-1345-4454-BDFC-2512336D9698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{369D5EAA-1345-4454-BDFC-2512336D9698}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2BD2B850-630C-429E-A170-EE8E7D5E2F33} = {253E8DEE-7C1C-4B9C-809A-FBBAE571CFEB}
+		{B7A5702A-15AE-4344-8CA8-620208DD82AA} = {CF23A2C5-43AB-468D-89AC-700140BD7AE6}
+		{369D5EAA-1345-4454-BDFC-2512336D9698} = {587E9823-B23A-460B-BA17-F756A2863565}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A748377B-9AB9-4CF6-8C65-53D3C6246990}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev2.kapusons.it:8082/defaultcollection
+		SccProjectUniqueName0 = src\\KsSelect\\KsSelect.csproj
+		SccProjectTopLevelParentUniqueName0 = KsSelect.sln
+		SccProjectName0 = src/KsSelect
+		SccLocalPath0 = src\\KsSelect
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = tests\\KsSelect.Tests\\KsSelect.Tests.csproj
+		SccProjectTopLevelParentUniqueName2 = KsSelect.sln
+		SccProjectName2 = tests/KsSelect.Tests
+		SccLocalPath2 = tests\\KsSelect.Tests
+		SccProjectUniqueName3 = samples\\KsSelect.Samples\\KsSelect.Samples.csproj
+		SccProjectTopLevelParentUniqueName3 = KsSelect.sln
+		SccProjectName3 = samples/KsSelect.Samples
+		SccLocalPath3 = samples\\KsSelect.Samples
+	EndGlobalSection
+EndGlobal
