@@ -8,21 +8,22 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp2.1;netcoreapp2.2;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-		<PackageId>ksSystem</PackageId>
-		<AssemblyName>ksSystem</AssemblyName>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
+		<PackageId>Kapusons.Select</PackageId>
+		<AssemblyName>Kapusons.SelectOptions</AssemblyName>
 		<RootNamespace>Kapusons.Components</RootNamespace>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Title>select-options</Title>
+		<Authors>Kapusons s.r.l.</Authors>
+		<Description>LINQ IQueryable Select extensions for strongly-typed dynamic projections composition</Description>
+		<PackageProjectUrl>https://github.com/kapusons/ks-select</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/kapusons/ks-select</RepositoryUrl>
+		<PackageTags>LINQ;IQueryable;Select;Extensions;.NET;.NET Core</PackageTags>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-	  <DocumentationFile>C:\Projects\Tfs\Kapusons_V3\SharedComponents\.NetCore\ksSystem\ksSystem.xml</DocumentationFile>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-	  <DocumentationFile></DocumentationFile>
-	</PropertyGroup>
-
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
 	  <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
@@ -96,6 +97,12 @@
 		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
