@@ -2,7 +2,7 @@
 
 namespace Kapusons.Components.Util.Tests
 {
-	public class PredicateBuilderTests
+	public class KsSelectTests
 	{
 		private class Product
 		{
