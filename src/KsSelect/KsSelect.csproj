@@ -19,8 +19,8 @@
 		<PackageProjectUrl>https://github.com/kapusons/ks-select</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/kapusons/ks-select</RepositoryUrl>
 		<PackageTags>LINQ;IQueryable;Select;Extensions;.NET;.NET Core</PackageTags>
-		<AssemblyVersion>1.0.0</AssemblyVersion>
-		<FileVersion>1.0.0</FileVersion>
+		<AssemblyVersion>1.0.1</AssemblyVersion>
+		<FileVersion>1.0.1</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>

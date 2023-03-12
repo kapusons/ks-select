@@ -28,6 +28,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
                         </li>
+                        <li class="nav-link text-dark">
+                            Change content language to:
+                            @if (CultureInfo.CurrentUICulture.Name == "en")
+                            {
+                                <a asp-route-culture="it">italiano</a>
+                            }
+                            else
+                            {
+                                <a asp-route-culture="en">English</a>
+                            }
+                        </li>
                     </ul>
                 </div>
             </div>

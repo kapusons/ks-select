@@ -1,10 +1,10 @@
 ﻿#nullable disable
 namespace KsSelect.Samples.Models;
 
-public class BookLocalizationJoin
+public class BookAuthorJoin
 {
 	public Book Book { get; set; }
 
-	public BookLocalization Localization { get; set; }
+	public Author Author { get; set; }
 }
 #nullable restore

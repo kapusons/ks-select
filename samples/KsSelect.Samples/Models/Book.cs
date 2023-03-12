@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 namespace KsSelect.Samples.Models;
 
 public class Book : Entity
 {
+	[Required]
 	public string Title { get; set; }
 
 	public string Description { get; set; }

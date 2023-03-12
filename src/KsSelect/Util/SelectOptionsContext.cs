@@ -65,14 +65,18 @@ namespace Kapusons.Components.Util
 			if (SelectOptions is null) return SetupScopedContext(this, options, provider, columnExpressionsInputType);
 
 			var nestedContext = SetupScopedContext(new SelectOptionsContext<TEntity>(), options, provider, columnExpressionsInputType);
-			Next = nestedContext;
+
+			//Next = nestedContext;
+			var current = this;
+			while (current.Next != null) current = current.Next;
+			current.Next = nestedContext;
 
 			return nestedContext;
 		}
 		private SelectOptionsContext<TEntity> SetupScopedContext(SelectOptionsContext<TEntity> context, SelectOptions options, Func<SelectOptions, IQueryable<TEntity>, IQueryable<TEntity>> provider, Type columnExpressionsInputType)
 		{
 			context.SelectOptions = options;
-			context.SelectOptionsProvider = (o, q0) => provider(/*(SelectOptions<T, TEntity>)o*/options, q0);
+			context.SelectOptionsProvider = provider;
 			context.ColumnExpressionsInputType = columnExpressionsInputType ?? typeof(TEntity);
 			return context;
 		}
@@ -133,7 +137,11 @@ namespace Kapusons.Components.Util
 			}
 
 			var nestedContext = SetupScopedContext(new SelectOptionsContext<TEntity>());
-			Next = nestedContext;
+
+			//Next = nestedContext;
+			var current = this;
+			while (current.Next != null) current = current.Next;
+			current.Next = nestedContext;
 
 			return nestedContext;
 
@@ -200,14 +208,18 @@ namespace Kapusons.Components.Util
 			if (columnsToInclude != null) options.ColumnsToInclude.AddRange(columnsToInclude);
 
 			if (columnsToExclude != null) options.ColumnsToExclude.AddRange(columnsToExclude);
-			//else
-			//{
-			//	options.ColumnsToExclude.AddRange(EntityTypeUtil
-			//		.GetNavigationPropertyNames<TEntity>()
-			//		.ValidateColumnNames(ExcludeNavigationPropertiesValidator)
-			//		/*.ToHashSet()*/);
-			//}
+			else
+			{
+				options.ColumnsToExclude.AddRange(ColumnsToExcludeProvider?.Invoke(typeof(TEntity))
+					.ValidateColumnNames(ExcludeNavigationPropertiesValidator) ?? Enumerable.Empty<string>()
+					/*.ToHashSet()*/);
+			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Func<Type, IEnumerable<string>> ColumnsToExcludeProvider { get; set; }
 
 		/// <summary>
 		/// 

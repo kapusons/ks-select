@@ -1,5 +1,8 @@
 using KsSelect.Samples.Infrastructure;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,8 +40,15 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+var supportedCultures = new[] { "en", "it" };
+app.UseRequestLocalization(new RequestLocalizationOptions()
+	.SetDefaultCulture(supportedCultures[0])
+	.AddSupportedCultures(supportedCultures)
+	.AddSupportedUICultures(supportedCultures)
+	.AddInitialRequestCultureProvider(new RouteDataRequestCultureProvider()));
+
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+	pattern: "{culture=en}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

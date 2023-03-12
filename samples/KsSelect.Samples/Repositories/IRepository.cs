@@ -39,7 +39,6 @@ public abstract class BaseRepository<TEntity, TQueryParameters> : IRepository<TE
 
 	protected virtual IQueryable<TEntity> ApplyFilter(IQueryable<TEntity> query, TQueryParameters parameters, SelectOptionsContext<TEntity> filterContext)
 	{
-
 		if (parameters.Id.HasValue) query = query.Where(it => it.Id == parameters.Id.Value);
 		if (parameters.Ids?.Any() ?? false) query = query.Where(it => parameters.Ids.Contains(it.Id));
 

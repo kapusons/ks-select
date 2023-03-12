@@ -17,12 +17,13 @@ public class BooksController : Controller
 		_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 	}
 
-	public IActionResult Index()
+	public IActionResult Index(string? titleFilter)
 	{
 		var filter = new BookFilter
 		{
 			IncludeAuthorName = true,
-			IncludeAuthorInfo = true
+			IncludeAuthorInfo = true,
+			Title = titleFilter,
 		};
 		var items = _bookRepository.Query(filter).Select(x => _mapper.Map<BookViewModel>(x));
 		return View(items);

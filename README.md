@@ -70,6 +70,21 @@ The target projection can be obtained through (multiple, chained) internal query
 			}, it => it.Book);
 		}
 
+		// replace Title and Description fields with localized versions from BooksLocalization (demonstrated in the sample project)
+		if (CultureInfo.CurrentUICulture.Name != DefaultLanguage)
+		{
+			filterContext.UseScoped<BookLocalizationJoin>((options, q0) =>
+			{
+				var joinedQuery = q0.Join(Context.GetBooksLocalizationQuery(),
+					b => b.Id,
+					l => l.BookId,
+					(b, l) => new BookLocalizationJoin { Book = b, Localization = l });
+				options.Include(book => book.Title, it => it.Localization.Title);
+				options.Include(book => book.Description, it => it.Localization.Description);
+				return joinedQuery;
+			}, it => it.Book);
+		}
+
 		// ...
 
 		query = query.ApplySelectOptions(filterContext);

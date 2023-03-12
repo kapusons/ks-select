@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<BookViewModel>
 
+<div>
+	<form method="get">
+		<input name="titleFilter" type="text" placeholder="filter by title (in current language)" value="@Context.Request.Query["titleFilter"]" class="form-control" />
+	</form>
+</div>
 <div class="table-responsive mt-2">
 	<table class="table table-bordered table-striped table-fixed mb-0">
 		<thead class="thead-dark">
