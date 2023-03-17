@@ -1,4 +1,5 @@
 # select-options (aka ks-select)
+![Nuget](https://img.shields.io/nuget/v/Kapusons.Select)
 
 Augments linq `IQueryable` `Select` capabilities with configurable options to allow build composable projections, based on conditional constructs.
 > works virtually with any linq provider and linq-based framework (linq to objects, ef6, ef-core, etc.), because it simply generates an expression tree for the `IQueryable` `Select` method.
