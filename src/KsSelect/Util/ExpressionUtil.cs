@@ -13,7 +13,7 @@ namespace Kapusons.Components.Util
 	/// <summary>
 	/// An helper class for working with expressions.
 	/// </summary>
-	public static class ExpressionUtil
+	internal static class ExpressionUtil
 	{
 		//public static string GetModelName(string expression)
 		//{

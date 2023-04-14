@@ -193,7 +193,7 @@ namespace Kapusons.Components.Util
 	/// <summary>
 	/// 
 	/// </summary>
-	public static partial class PredicateBuilder
+	public static partial class LinqUtil
 	{
 		#region SelectOptions
 		private class SelectOptionsItem
@@ -418,218 +418,12 @@ namespace Kapusons.Components.Util
 		#endregion SelectOptions
 
 		/// <summary>
-		/// Begin an expression chain.
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="value">Default return value if the chain is ended early.</param>
-		/// <returns>A lambda expression stub.</returns>
-		public static Expression<Func<T, bool>> New<T>(bool value = false)
-		{
-			if (value) return parameter => true; //value cannot be used in place of true/false
-
-			return parameter => false;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="left"></param>
-		/// <param name="right"></param>
-		/// <returns></returns>
-		public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
-			=> CombineLambdas(left, right, ExpressionType.AndAlso);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="left"></param>
-		/// <param name="right"></param>
-		/// <returns></returns>
-		public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
-			=> CombineLambdas(left, right, ExpressionType.OrElse);
-
-		#region Invoke
-		// References:
-		//	https://github.com/scottksmith95/LINQKit/blob/master/src/LinqKit.Core/Linq.cs
-		//	https://github.com/scottksmith95/LINQKit
-		//	http://tomasp.net/blog/dynamic-linq-queries.aspx/
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<TResult>(this Expression<Func<TResult>> expr)
-		{
-			return expr.Compile().Invoke();
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, TResult>(this Expression<Func<T1, TResult>> expr, T1 arg1)
-		{
-			return expr.Compile().Invoke(arg1);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, TResult>(this Expression<Func<T1, T2, TResult>> expr, T1 arg1, T2 arg2)
-		{
-			return expr.Compile().Invoke(arg1, arg2);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, TResult>(
-			this Expression<Func<T1, T2, T3, TResult>> expr, T1 arg1, T2 arg2, T3 arg3)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, TResult>(
-			this Expression<Func<T1, T2, T3, T4, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4);
-		}
-
-#if !(NET35 || NET40)
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15);
-		}
-
-		/// <summary>Compile and invoke.</summary>
-		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
-			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5,
-		T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15, T16 arg16)
-		{
-			return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16);
-		}
-#endif //!(NET35 || NET40)
-		#endregion Invoke
-
-		#region Expr/Func
-		// References:
-		//	https://github.com/scottksmith95/LINQKit/blob/master/src/LinqKit.Core/Linq.cs
-		//	https://github.com/scottksmith95/LINQKit
-		//	http://tomasp.net/blog/dynamic-linq-queries.aspx/
-
-		/// <summary>
-		/// Returns the given anonymous method as a lambda expression
-		/// </summary>
-		public static Expression<Func<TResult>> Expr<TResult>(Expression<Func<TResult>> expr) => expr;
-
-		/// <summary>
-		/// Returns the given anonymous method as a lambda expression
-		/// </summary>
-		public static Expression<Func<T, TResult>> Expr<T, TResult>(Expression<Func<T, TResult>> expr) => expr;
-
-		/// <summary>
-		/// Returns the given anonymous method as a lambda expression.
-		/// </summary>
-		public static Expression<Func<T1, T2, TResult>> Expr<T1, T2, TResult>(Expression<Func<T1, T2, TResult>> expr) => expr;
-
-		/// <summary>
-		/// Returns the given anonymous function as a Func delegate.
-		/// </summary>
-		public static Func<TResult> Func<TResult>(Func<TResult> expr) => expr;
-
-		/// <summary>
-		/// Returns the given anonymous function as a Func delegate.
-		/// </summary>
-		public static Func<T, TResult> Func<T, TResult>(Func<T, TResult> expr) => expr;
-
-		/// <summary>
-		/// Returns the given anonymous function as a Func delegate.
-		/// </summary>
-		public static Func<T1, T2, TResult> Func<T1, T2, TResult>(Func<T1, T2, TResult> expr) => expr;
-		#endregion Expr/Func
-
-		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="expression"></param>
 		/// <param name="replacementParameter"></param>
 		/// <returns></returns>
-		public static LambdaExpression ReplaceParameter(this LambdaExpression expression, ParameterExpression replacementParameter)
+		private static LambdaExpression ReplaceParameter(this LambdaExpression expression, ParameterExpression replacementParameter)
 		{
 			if (expression is null) throw new ArgumentNullException(nameof(expression));
 			if (replacementParameter is null) throw new ArgumentNullException(nameof(replacementParameter));
@@ -646,7 +440,7 @@ namespace Kapusons.Components.Util
 		/// <param name="expression"></param>
 		/// <param name="replacementParameter"></param>
 		/// <returns></returns>
-		public static Expression UnwrapLambda(this Expression expression, ParameterExpression replacementParameter)
+		private static Expression UnwrapLambda(this Expression expression, ParameterExpression replacementParameter)
 		{
 			if (expression is null) throw new ArgumentNullException(nameof(expression));
 			if (replacementParameter is null) throw new ArgumentNullException(nameof(replacementParameter));
@@ -657,21 +451,6 @@ namespace Kapusons.Components.Util
 		}
 
 		#region Private
-		private static Expression<Func<T, bool>> CombineLambdas<T>(this Expression<Func<T, bool>> left,
-			Expression<Func<T, bool>> right, ExpressionType expressionType)
-		{
-			//Remove expressions created with Begin<T>()
-			if (IsExpressionBodyConstant(left)) return (right);
-
-			ParameterExpression p = left.Parameters[0];
-
-			SubstituteParameterVisitor visitor = new SubstituteParameterVisitor();
-			visitor.Sub[right.Parameters[0]] = p;
-
-			Expression body = Expression.MakeBinary(expressionType, left.Body, visitor.Visit(right.Body));
-			return Expression.Lambda<Func<T, bool>>(body, p);
-		}
-
 		private static bool IsExpressionBodyConstant<T>(Expression<Func<T, bool>> left)
 			=> left.Body.NodeType == ExpressionType.Constant;
 

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Kapusons.Components.Util
 {
-	partial class PredicateBuilder
+	partial class LinqUtil
 	{
 		/// <summary>
 		/// 
@@ -16,7 +16,7 @@ namespace Kapusons.Components.Util
 		/// <param name="target"></param>
 		/// <param name="collection"></param>
 		/// <exception cref="ArgumentNullException"></exception>
-		public static void AddRange<T>(this ICollection<T> target, IEnumerable<T> collection)
+		internal static void AddRange<T>(this ICollection<T> target, IEnumerable<T> collection)
 		{
 			if (target is null) throw new ArgumentNullException(nameof(target));
 			if (collection is null) throw new ArgumentNullException(nameof(collection));

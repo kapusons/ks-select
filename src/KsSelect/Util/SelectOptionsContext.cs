@@ -35,7 +35,7 @@ namespace Kapusons.Components.Util
 		/// <param name="provider">
 		/// Delegato da invocare per l'esecuzione della proiezione.
 		/// Il delegato riceve in input i parametri della proiezione (<see cref="SelectOptions"/>) e la query di origine (<see cref="IQueryable{TEntity}"/>),
-		/// attraverso la quale potrà effettuare la derivazione, eseguire la proiezione (utilizzando <see cref="PredicateBuilder.Select{TEntity, TResult}(IQueryable{TEntity}, SelectOptions)"/>),
+		/// attraverso la quale potrà effettuare la derivazione, eseguire la proiezione (utilizzando <see cref="LinqUtil.Select{TEntity, TResult}(IQueryable{TEntity}, SelectOptions)"/>),
 		/// e infine restituire una query compatibile con quella di input (la trasformazione effettuata non sarà visibile all'esterno).
 		/// </param>
 		/// <param name="columnExpressionsInputType"></param>
@@ -87,7 +87,7 @@ namespace Kapusons.Components.Util
 		/// <param name="provider">
 		/// Delegato da invocare per l'esecuzione della proiezione.
 		/// Il delegato riceve in input i parametri della proiezione (<see cref="SelectOptions"/>) e la query di origine (<see cref="IQueryable{TEntity}"/>),
-		/// attraverso la quale potrà effettuare la derivazione, eseguire la proiezione (utilizzando <see cref="PredicateBuilder.Select{TEntity, TResult}(IQueryable{TEntity}, SelectOptions)"/>),
+		/// attraverso la quale potrà effettuare la derivazione, eseguire la proiezione (utilizzando <see cref="LinqUtil.Select{TEntity, TResult}(IQueryable{TEntity}, SelectOptions)"/>),
 		/// e infine restituire una query compatibile con quella di input (la trasformazione effettuata non sarà visibile all'esterno).
 		/// </param>
 		/// <param name="sourceToTargetSelector"></param>
