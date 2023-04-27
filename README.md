@@ -5,12 +5,13 @@ Augments linq `IQueryable` `Select` capabilities with configurable options to al
 > works virtually with any linq provider and linq-based framework (linq to objects, ef6, ef-core, etc.), because it simply generates an expression tree for the `IQueryable` `Select` method.
 
 ---
-
+```csharp
 	query.Select<Product, ProductInfo>(options =>
 	{
 		options.Include(it => it.Category, it => categoryQuery.Where(c => c.Id == it.CategoryId).Select(c => c.Name).FirstOrDefault());
 		options.Exclude(it => it.Description);
 	});
+```
 
 ## Features
 
