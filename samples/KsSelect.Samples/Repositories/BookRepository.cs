@@ -24,10 +24,10 @@ public class BookRepository : BaseRepository<Book, BookFilter>, IBookRepository
 
 			var authorsQuery = Context.GetAuthorsQuery();
 
-			options.ColumnExpressions[nameof(Book.AuthorName)] = (Book it) =>
+			options.Include(it => it.AuthorName, it =>
 				authorsQuery.Where(g => g.Id == it.AuthorId)
 					.Select(it => it.FirstName + " " + it.LastName)
-					.FirstOrDefault();
+					.FirstOrDefault());
 		}
 
 		if (parameters.IncludeAuthorInfo)

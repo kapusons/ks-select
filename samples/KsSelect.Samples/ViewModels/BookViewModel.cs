@@ -9,4 +9,6 @@ public class BookViewModel
 	public string? Description { get; set; }
 
 	public AuthorInfoViewModel? AuthorInfo { get; set; }
+
+	public string? AuthorName { get; set; }
 }

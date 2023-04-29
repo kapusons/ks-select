@@ -142,19 +142,19 @@ namespace Kapusons.Components.Util
 				.Any(p => p.GetGetMethod() == methodExpression.Method);
 		}
 
-		/// <summary>
-		/// Gets a list <see cref="PropertyInfo"/> for the properties references by the specified lambda expression.
-		/// </summary>
-		/// <param name="lambda"></param>
-		/// <returns></returns>
-		public static IEnumerable<PropertyInfo> GetPropertyList(this LambdaExpression lambda)
-		{
-			// https://stackoverflow.com/questions/40495725/get-propertyinfo-from-lambda-expression-but-fails-with-int
+		///// <summary>
+		///// Gets a list <see cref="PropertyInfo"/> for the properties references by the specified lambda expression.
+		///// </summary>
+		///// <param name="lambda"></param>
+		///// <returns></returns>
+		//private static IEnumerable<PropertyInfo> GetPropertyList(this LambdaExpression lambda)
+		//{
+		//	// https://stackoverflow.com/questions/40495725/get-propertyinfo-from-lambda-expression-but-fails-with-int
 
-			var body = lambda.Body;
-			if (body.NodeType == ExpressionType.Convert) body = ((UnaryExpression)body).Operand;
-			return GetPropertyList(body as MemberExpression);
-		}
+		//	var body = lambda.Body;
+		//	if (body.NodeType == ExpressionType.Convert) body = ((UnaryExpression)body).Operand;
+		//	return GetPropertyList(body as MemberExpression);
+		//}
 		private static IEnumerable<PropertyInfo> GetPropertyList(MemberExpression body)
 		{
 			var result = new List<PropertyInfo>();

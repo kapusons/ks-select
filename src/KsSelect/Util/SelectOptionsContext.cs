@@ -28,7 +28,6 @@ namespace Kapusons.Components.Util
 
 		internal SelectOptionsContext<TEntity> Next { get; private set; }
 
-		// for internal join projections
 		/// <summary>
 		/// Crea un contesto figlio per l'esecuzione di una proiezione basata su una derivazione (es. join) della query.
 		/// </summary>

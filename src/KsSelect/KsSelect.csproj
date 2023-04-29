@@ -18,12 +18,12 @@
 		<Description>LINQ IQueryable Select extensions for strongly-typed dynamic projections composition</Description>
 		<PackageProjectUrl>https://github.com/kapusons/ks-select</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/kapusons/ks-select</RepositoryUrl>
-		<PackageTags>LINQ;IQueryable;Select;Extensions;.NET;.NET-Core;Transparent-Query-Results-Localization;</PackageTags>
-		<AssemblyVersion>1.0.3</AssemblyVersion>
-		<FileVersion>1.0.3</FileVersion>
+		<PackageTags>LINQ;IQueryable;Select;Extensions;.NET;.NET-Core;Transparent-Query-Results-Localization;Transparent;Query;Localization;</PackageTags>
+		<AssemblyVersion>1.0.4</AssemblyVersion>
+		<FileVersion>1.0.4</FileVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<PackageIcon>logo.png</PackageIcon>
 	</PropertyGroup>
 
