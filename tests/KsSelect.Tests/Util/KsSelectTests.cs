@@ -11,6 +11,8 @@ namespace Kapusons.Components.Util.Tests
 			public string? Name { get; set; }
 
 			public string? Description { get; set; }
+
+			public int? NonPublicSetterProperty { get; internal set; }
 		}
 		private class ProductInfo
 		{
@@ -19,6 +21,8 @@ namespace Kapusons.Components.Util.Tests
 			public string? Category { get; set; }
 
 			public string? Description { get; set; }
+
+			public int? NonPublicSetterProperty { get; private set; }
 		}
 
 		public class Category
@@ -39,7 +43,7 @@ namespace Kapusons.Components.Util.Tests
 			};
 			var query = new[]
 			{
-				new Product { Name = "Product 1", CategoryId = 1, Description = "long description" },
+				new Product { Name = "Product 1", CategoryId = 1, Description = "long description", NonPublicSetterProperty = 1 },
 				new Product { Name = "Product 2", CategoryId = 1 },
 				new Product { Name = "Product 3", CategoryId = 2 },
 			}.AsQueryable();
@@ -51,13 +55,25 @@ namespace Kapusons.Components.Util.Tests
 				options.Include(it => it.Category, it => categoryQuery.Where(c => c.Id == it.CategoryId).Select(c => c.Name).FirstOrDefault());
 				options.Exclude(it => it.Description);
 			}).ToList();
+			var result2 = query.Select<Product, ProductInfo>(options =>
+			{
+				options.IncludePropertiesWithNonPublicSetters = false;
+				options.Include(it => it.Category, it => categoryQuery.Where(c => c.Id == it.CategoryId).Select(c => c.Name).FirstOrDefault());
+				options.Exclude(it => it.Description);
+			}).ToList();
 
 			// Assert
 			Assert.NotEmpty(result);
-			Assert.Contains(result, it => it.Name == "Product 1" && it.Category == "Category 1");
+			Assert.Contains(result, it => it.Name == "Product 1" && it.Category == "Category 1" && it.NonPublicSetterProperty == 1);
 			Assert.Contains(result, it => it.Name == "Product 2" && it.Category == "Category 1");
 			Assert.Contains(result, it => it.Name == "Product 3" && it.Category == "Category 2");
 			Assert.All(result, it => Assert.Null(it.Description));
+
+			Assert.NotEmpty(result2);
+			Assert.Contains(result2, it => it.Name == "Product 1" && it.Category == "Category 1" && it.NonPublicSetterProperty == null);
+			Assert.Contains(result2, it => it.Name == "Product 2" && it.Category == "Category 1");
+			Assert.Contains(result2, it => it.Name == "Product 3" && it.Category == "Category 2");
+			Assert.All(result2, it => Assert.Null(it.Description));
 		}
 	}
 }

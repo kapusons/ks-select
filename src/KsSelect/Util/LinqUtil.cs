@@ -87,6 +87,11 @@ namespace Kapusons.Components.Util
 		/// <summary>
 		/// 
 		/// </summary>
+		public bool IncludePropertiesWithNonPublicSetters { get; set; } = true;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public ISet<string> ColumnsToInclude { get; set; } = new HashSet<string>();
 
 		/// <summary>
@@ -357,7 +362,7 @@ namespace Kapusons.Components.Util
 			Type rootSourceType, Type sourceType = null)
 		{
 			return type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-				.Where(it => it.CanWrite && it.GetSetMethod().IsPublic)
+				.Where(it => it.CanWrite && (options.IncludePropertiesWithNonPublicSetters || it.GetSetMethod(true).IsPublic))
 				.Select(it => new SelectOptionsItem
 				{
 					BaseKey = baseKey,
