@@ -1,8 +1,8 @@
 # select-options (aka ks-select)
 [![NuGet](https://img.shields.io/nuget/v/Kapusons.Select?label=NuGet)](https://www.nuget.org/packages/Kapusons.Select)
 
-Augments linq `IQueryable` `Select` capabilities with configurable options to allow build composable projections, based on conditional constructs.
-> works virtually with any linq provider and linq-based framework (linq to objects, ef6, ef-core, etc.), because it simply generates an expression tree for the `IQueryable` `Select` method.
+Augments LINQ `IQueryable` `Select` capabilities with configurable options to allow build composable projections, based on conditional constructs.
+> works virtually with any LINQ provider and LINQ-based framework (LINQ to objects, ef6, ef-core, etc.), because it simply generates an expression tree for the `IQueryable` `Select` method.
 
 ---
 ```csharp
@@ -36,10 +36,10 @@ or
 Properties with a matching name are automatically mapped from the original type to the target type. Supports complex type properties.
 
 ### Provider agnostic
-Works virtually with any linq provider and linq-based framework (linq to objects, ef6, ef-core, etc.), because it simply generates an expression tree for the `IQueryable` `Select` method.
+Works virtually with any LINQ provider and LINQ-based framework (LINQ to objects, ef6, ef-core, etc.), because it simply generates an expression tree for the `IQueryable` `Select` method.
 
 ### Scoping and Chaining
-The target projection can be obtained through (multiple, chained) internal query tranformations without changing the type of the original `IQueryable<T>`:
+The target projection can be obtained through (multiple, chained) internal query transformations without changing the type of the original `IQueryable<T>`:
 ```csharp
 	protected IQueryable<Book> ApplyFilter(IQueryable<Book> query, BookFilter parameters, SelectOptionsContext<Book> filterContext)
 	{
@@ -94,4 +94,16 @@ The target projection can be obtained through (multiple, chained) internal query
 
 		return query;
 	}
+```
+
+### No collisions/ambiguities with standard Queryable Select methods
+The different query overloads can be both used in the same context without explicit casts/type parameters, because the compiler (and Visual Studio Intellisense) is smart enough to pick automatically the right method:
+
+```csharp
+// standard Queryable methods
+query.Select(it => it.Name);
+query.Select(it => new { it.Name });
+
+// select-options method
+query.Select(o => o.Include(it => it.RelatedItemCount, it => relatedItemQuery.Count()));
 ```
