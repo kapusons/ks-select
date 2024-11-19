@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Kapusons.Select" Version="1.2.0" />
+		<PackageReference Include="Kapusons.Select" Version="1.3.0" />
 		<!--<ProjectReference Include="..\..\src\KsSelect\KsSelect.csproj" />-->
 	</ItemGroup>
 
