@@ -105,5 +105,5 @@ query.Select(it => it.Name);
 query.Select(it => new { it.Name });
 
 // select-options method
-query.Select(o => o.Include(it => it.RelatedItemCount, it => relatedItemQuery.Count()));
+query.Select(o => o.Include(it => it.RelatedItemCount, it => relatedItemQuery.Where(r => r.RelatedId == it.Id).Count()));
 ```
