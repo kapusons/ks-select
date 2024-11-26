@@ -107,3 +107,37 @@ query.Select(it => new { it.Name });
 // select-options method
 query.Select(o => o.Include(it => it.RelatedItemCount, it => relatedItemQuery.Where(r => r.RelatedId == it.Id).Count()));
 ```
+
+### Loosely typed mode for advanced scenarios
+
+```csharp
+		public static IQueryable<T> ApplyFiltersAndProjections<T>(this IQueryable<T> query, SelectOptionsContext<T> filterContext, bool allowSensitiveColumns = false)
+			where T : Entity
+		{
+			if (typeof(T).IsAssignableTo(typeof(ITaggable)))
+			{
+				// include TagNames column
+				var ownerType = EntityUtil.GetEntityType<TEntity>();
+				var selectToOptions = filterContext.UseSelectOptions();
+				selectToOptions.ColumnExpressions[nameof(ITaggable.TagNames)] = (TEntity it)
+					=> MyDbContextFunctions.GetTagNames(ownerType, it.Id, tagType);
+			}
+
+			if (!allowSensitiveColumns && typeof(T).IsAssignableTo(typeof(ISensitiveDataContainer)))
+			{
+				// exclude sensitive columns
+				var sensitiveColumnNames = EntityUtil.GetSensitiveColumnNames<TEntity>();
+
+				var selectToOptions = filterContext.UseSelectOptions();
+				foreach (var columnName in sensitiveColumnNames)
+				{
+					selectToOptions.ColumnsToExclude.Add(columnName);
+				}
+			}
+
+			// ... other filters and projections
+
+			return query;
+		}
+
+```
